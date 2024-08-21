@@ -52,8 +52,5 @@ def testRealEven(x: NDArray[np.float64]):
     ## Your code here
     mid = len(x) // 2
     dft_buffer = np.concat([x[mid:], x[:mid]])
-    return (
-        bool(np.all(np.isreal(x))) and bool(np.all(x[:mid] == x[:mid:-1])),
-        dft_buffer,
-        fft(dft_buffer),
-    )
+    fft_buffer = fft(dft_buffer)
+    return bool(np.all(np.abs(np.imag(fft_buffer)) <= 1e-6)), dft_buffer, fft_buffer
