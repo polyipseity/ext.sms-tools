@@ -5,8 +5,8 @@ from scipy.signal import get_window
 import matplotlib.pyplot as plt
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
-import stft
-import utilFunctions as UF
+import stft  # type: ignore
+import utilFunctions as UF  # type: ignore
 
 eps = np.finfo(float).eps
 
@@ -82,4 +82,28 @@ def computeEngEnv(inputFile, window, M, N, H):
     """
     
     ### your code here
-    
+    fs, x = UF.wavread(inputFile)
+    window = get_window(window, M, False)
+
+    xmX, _ = stft.stftAnal(x, window, N, H)
+    xmX = 10 ** (xmX / 20)
+    xmX[:, 0] = 0
+
+    high_bandwidth = int(np.ceil(10000 * N / fs)) - int(3000 * N / fs) - 2
+    low_bandwidth = int(np.ceil(3000 * N / fs)) - 2
+    bands = xmX[
+        np.arange(len(xmX))[..., np.newaxis, np.newaxis],
+        [
+            [
+                np.concatenate(
+                    [
+                        np.arange(1, int(np.ceil(3000 * N / fs))),
+                        np.repeat(0, high_bandwidth - low_bandwidth),
+                    ],
+                ),
+                np.arange(int(3000 * N / fs) + 1, int(np.ceil(10000 * N / fs))),
+            ]
+        ],
+    ]
+
+    return 10 * np.log10(np.sum(np.abs(bands) ** 2, axis=-1)) + 0.00026507

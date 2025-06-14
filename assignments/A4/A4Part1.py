@@ -61,4 +61,12 @@ def extractMainLobe(window, M):
     w = get_window(window, M)         # get the window 
     
     ### Your code here
-    
+    W = fft(w, 8 * M)
+    spectrum = 20 * np.log10(np.absolute(W) + 1e-16)
+
+    left_minimum_idx = np.argmax(spectrum[:-1] < spectrum[1:])
+    right_minimum_idx = np.argwhere(spectrum[:-1] > spectrum[1:])[-1][0] + 1
+
+    return np.concatenate(
+        [spectrum[right_minimum_idx:], spectrum[: left_minimum_idx + 1]]
+    )

@@ -6,8 +6,8 @@ from scipy.signal import get_window
 import matplotlib.pyplot as plt
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
-import stft
-import utilFunctions as UF
+import stft  # type: ignore
+import utilFunctions as UF  # type: ignore
 eps = np.finfo(float).eps
 
 
@@ -60,3 +60,15 @@ def computeSNR(inputFile, window, M, N, H):
             SNR1 and SNR2 are floats.
     """
     ## your code here
+    x = UF.wavread(inputFile)[1]
+    window = get_window(window, M, False)
+
+    y = stft.stft(x, window, N, H)
+
+    x2 = x[M:-M]
+    y2 = y[M:-M]
+
+    return (
+        10 * math.log10(np.sum(np.abs(x) ** 2) / np.sum(np.abs(y - x) ** 2)),
+        10 * math.log10(np.sum(np.abs(x2) ** 2) / np.sum(np.abs(y2 - x2) ** 2)),
+    )
