@@ -1,7 +1,7 @@
 ﻿import sys
 
 sys.path.append("../../software/models/")
-from dftModel import dftAnal
+from dftModel import dftAnal  # type: ignore
 import numpy as np
 from numpy.typing import NDArray
 from scipy.signal import get_window

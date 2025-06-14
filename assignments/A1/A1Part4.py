@@ -2,7 +2,7 @@ import sys
 import os
 
 sys.path.append("../../software/models/")
-from utilFunctions import wavread, wavwrite
+from utilFunctions import wavread, wavwrite  # type: ignore
 from A1Part3 import hopSamples
 
 """

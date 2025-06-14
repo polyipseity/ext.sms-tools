@@ -13,7 +13,7 @@ import subprocess
 import os
 import matplotlib.pyplot as plt
 # Python 2 and 3 compatibility:
-try: input = raw_input
+try: input = raw_input  # type: ignore
 except: pass
 plt.ion()
 """"""""""""""""""""
@@ -144,7 +144,7 @@ def submitSolution_all_parts(email_adress, secret):
             output_64_msg = email.message.Message()
             output_64_msg.set_payload(out)
             email.encoders.encode_base64(output_64_msg)
-            outputs.append(output_64_msg.get_payload() + '\n\n\n' + source(idx)) # concatenating the source code for log
+            outputs.append(output_64_msg.get_payload() + '\n\n\n' + source(idx)) # concatenating the source code for log  # type: ignore
     parts = get_all_parts(outputs)
     values = { "assignmentKey" : ASSIGNMENT_KEY, \
              "submitterEmail" : email_adress, \
@@ -171,7 +171,7 @@ def send_request_new(values):
     url = submit_url()  
     #data = urllib.urlencode(values)
     try:
-        import urllib2
+        import urllib2  # type: ignore
         req = urllib2.Request(url, json.dumps(values), headers)
         response = urllib2.urlopen(req)
         string = response.read().strip()

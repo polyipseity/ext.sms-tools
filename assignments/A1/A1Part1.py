@@ -2,7 +2,7 @@ import sys
 import os
 
 sys.path.append("../../software/models/")
-from utilFunctions import wavread
+from utilFunctions import wavread  # type: ignore
 
 """
 A1-Part-1: Reading an audio file
