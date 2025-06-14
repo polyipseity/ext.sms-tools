@@ -24,3 +24,9 @@ software/transformations_interface/output_sounds/*.wav
 software/models/utilFunctions_C/utilFunctions_C.cp310-win_amd64.pyd
 software/models/utilFunctions_C/utilFunctions_C.cp39-win_amd64.pyd
 software/models_GUI.pyproj
+
+# custom {
+/sms_tools.egg-info/
+/smstools/models/utilFunctions_C/cutilFunctions.c
+/smstools/models/utilFunctions_C/utilFunctions_C.*.pyd
+# }
