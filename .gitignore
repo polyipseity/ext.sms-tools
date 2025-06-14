@@ -29,4 +29,5 @@ software/models_GUI.pyproj
 /sms_tools.egg-info/
 /smstools/models/utilFunctions_C/cutilFunctions.c
 /smstools/models/utilFunctions_C/utilFunctions_C.*.pyd
+/sounds/
 # }
