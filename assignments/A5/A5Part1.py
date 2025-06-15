@@ -3,8 +3,8 @@ from scipy.signal import get_window
 import math
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
-import dftModel as DFT
-import utilFunctions as UF
+import dftModel as DFT  # type: ignore
+import utilFunctions as UF  # type: ignore
 
 """ 
 A5-Part-1: Minimizing the frequency estimation error of a sinusoid
@@ -61,3 +61,15 @@ def minFreqEstErr(inputFile, f):
     t = -40
     
     ### Your code here
+    fs, x = UF.wavread(inputFile)
+    M = 101
+    while True:
+        N = 2 ** math.ceil(math.log2(M))
+        w = get_window(window, M, False)
+        mX, pX = DFT.dftAnal(x[fs // 2 - M // 2 : fs // 2 + M // 2 + 1], w, N)
+        pLocs = UF.peakDetection(mX, t)
+        ipLocs, _, _ = UF.peakInterp(mX, pX, pLocs)
+        errors = np.abs(ipLocs * fs / N - f)
+        if np.min(errors) < 0.05:
+            return ipLocs[np.argmin(errors)] * fs / N, M, N
+        M += 100

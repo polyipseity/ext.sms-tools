@@ -2,9 +2,9 @@ import numpy as np
 from scipy.signal import get_window
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
-import stft
-import utilFunctions as UF
-import sineModel as SM
+import stft  # type: ignore
+import utilFunctions as UF  # type: ignore
+import sineModel as SM  # type: ignore
 import matplotlib.pyplot as plt
 """ 
 A5-Part-2: Tracking a two component chirp 
@@ -62,7 +62,7 @@ def chirpTracker(inputFile='../../sounds/chirp-150-190-linear.wav'):
            K is the number of frames
     """
     # Analysis parameters: Modify values of the parameters marked XX
-    M = XX                                # Window size in samples
+    M = 4000                              # Window size in samples
     
     ### Go through the code below and understand it, do not modify anything ###    
     H = 128                                     # Hop size in samples
@@ -88,6 +88,7 @@ def chirpTracker(inputFile='../../sounds/chirp-150-190-linear.wav'):
     mX, pX = stft.stftAnal(x, w, N, H)
     maxplotfreq = 1500.0
     binFreq = fs*np.arange(N*maxplotfreq/fs)/N
+    """
     plt.pcolormesh(tStamps, binFreq, np.transpose(mX[:,:N*maxplotfreq/fs+1]),cmap = 'hot_r')
     plt.plot(tStamps,fTrackTrue, 'o-', color = 'c', linewidth=3.0)
     plt.plot(tStamps,fTrackEst, color = 'y', linewidth=2.0)
@@ -96,6 +97,7 @@ def chirpTracker(inputFile='../../sounds/chirp-150-190-linear.wav'):
     plt.ylabel('Frequency (Hz)')
     plt.autoscale(tight=True)
     plt.show()
+    """
     return M, H, tStamps, fTrackEst, fTrackTrue  # Output returned 
 
 ### Do not modify this function

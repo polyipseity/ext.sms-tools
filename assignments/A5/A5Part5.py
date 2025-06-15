@@ -2,9 +2,9 @@ import numpy as np
 from scipy.signal import get_window
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
-import stft
-import utilFunctions as UF
-import sineModel as SM
+import stft  # type: ignore
+import utilFunctions as UF  # type: ignore
+import sineModel as SM  # type: ignore
 import matplotlib.pyplot as plt
 
 """
@@ -71,7 +71,7 @@ def exploreSineModel(inputFile='../../sounds/multiSines.wav'):
     # plot the input sound
     plt.subplot(3,1,1)
     plt.plot(np.arange(x.size)/float(fs), x)
-    plt.axis([0, x.size/float(fs), min(x), max(x)])
+    plt.axis([0, x.size/float(fs), min(x), max(x)])  # type: ignore
     plt.ylabel('amplitude')
     plt.xlabel('time (sec)')
     plt.title('input sound: x')
@@ -83,13 +83,13 @@ def exploreSineModel(inputFile='../../sounds/multiSines.wav'):
         frmTime = H*np.arange(numFrames)/float(fs)
         tfreq[tfreq<=0] = np.nan
         plt.plot(frmTime, tfreq)
-        plt.axis([0, x.size/float(fs), 0, maxplotfreq])
+        plt.axis([0, x.size/float(fs), 0, maxplotfreq])  # type: ignore
         plt.title('frequencies of sinusoidal tracks')
 
     # plot the output sound
     plt.subplot(3,1,3)
     plt.plot(np.arange(y.size)/float(fs), y)
-    plt.axis([0, y.size/float(fs), min(y), max(y)])
+    plt.axis([0, y.size/float(fs), min(y), max(y)])  # type: ignore
     plt.ylabel('amplitude')
     plt.xlabel('time (sec)')
     plt.title('output sound: y')

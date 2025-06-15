@@ -2,9 +2,9 @@ import numpy as np
 from scipy.signal import get_window
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
-import stft
-import utilFunctions as UF
-import sineModel as SM
+import stft  # type: ignore
+import utilFunctions as UF  # type: ignore
+import sineModel as SM  # type: ignore
 import matplotlib.pyplot as plt
 
 """
@@ -69,8 +69,8 @@ def mainlobeTracker(inputFile = '../../sounds/sines-440-602-hRange.wav'):
            fTrackTrue = A Kx2 numpy array of true frequency values, one row per time frame, one column per component
     """       
     # Analysis parameters: Modify values of the parameters marked XX
-    window = XX                                          # Window type
-    t = XX                                               # threshold (negative dB)
+    window = "blackmanharris"                            # Window type
+    t = -80                                              # threshold (negative dB)
     
     ### Go through the code below and understand it, do not modify anything ###   
     M = 2047                                             # Window size 
@@ -95,6 +95,7 @@ def mainlobeTracker(inputFile = '../../sounds/sines-440-602-hRange.wav'):
     mX, pX = stft.stftAnal(x, w, N, H)
     maxplotfreq = 900.0
     binFreq = fs*np.arange(N*maxplotfreq/fs)/N
+    """
     plt.pcolormesh(tStamps, binFreq, np.transpose(mX[:,:N*maxplotfreq/fs+1]), cmap='hot_r')
     plt.plot(tStamps,fTrackTrue, 'o-', color = 'c', linewidth=3.0)
     plt.plot(tStamps,fTrackEst, color = 'y', linewidth=2.0)
@@ -102,6 +103,7 @@ def mainlobeTracker(inputFile = '../../sounds/sines-440-602-hRange.wav'):
     plt.xlabel('Time (s)')
     plt.ylabel('Frequency (Hz)')
     plt.autoscale(tight=True)
+    """
     return window, float(t), tStamps, fTrackEst, fTrackTrue  # Output returned 
 
 ### Do not modify this function
