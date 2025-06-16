@@ -6,9 +6,9 @@ from scipy.signal import get_window
 import matplotlib.pyplot as plt
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
-import utilFunctions as UF
-import harmonicModel as HM
-import stft
+import utilFunctions as UF  # type: ignore
+import harmonicModel as HM  # type: ignore
+import stft  # type: ignore
 
 eps = np.finfo(float).eps
 
@@ -75,11 +75,21 @@ def estimateInharmonicity(inputFile = '../../sounds/piano.wav', t1=0.1, t2=0.5, 
                                         t1 and t2. 
     """
     # 0. Read the audio file and obtain an analysis window
-    
+    fs, x = UF.wavread(inputFile)
+    w = get_window(window, M, False)
+
     # 1. Use harmonic model to compute the harmonic frequencies and magnitudes
-    
+    xhfreq, xhmag, xhphase = HM.harmonicModelAnal(
+        x, fs, w, N, H, t, nH, minf0, maxf0, f0et, harmDevSlope=0.01, minSineDur=0
+    )
+
     # 2. Extract the time segment in which you need to compute the inharmonicity. 
-    
+    frame_indices = slice(int(t1 * fs / H) + 1, math.ceil(t2 * fs / H))
+    xhfreq, xhmag, xhphase = np.array([xhfreq, xhmag, xhphase])[:, frame_indices]
+
     # 3. Compute the mean inharmonicity of the segment
-
-
+    inharmonicities = (
+        np.abs(xhfreq - np.arange(1, nH + 1) * xhfreq[:, 0][..., np.newaxis])
+    ) / np.arange(1, nH + 1)
+    inharmonicities = np.mean(inharmonicities, axis=-1, where=xhfreq > 0)
+    return float(np.mean(inharmonicities, where=xhfreq[:, 0] > 0))

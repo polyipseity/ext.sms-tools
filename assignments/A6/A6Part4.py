@@ -6,10 +6,10 @@ from scipy.signal import get_window
 import matplotlib.pyplot as plt
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
-import utilFunctions as UF
-import harmonicModel as HM
-import dftModel as DFT
-import stft
+import utilFunctions as UF  # type: ignore
+import harmonicModel as HM  # type: ignore
+import dftModel as DFT  # type: ignore
+import stft  # type: ignore
 
 eps = np.finfo(float).eps
 

@@ -6,10 +6,10 @@ from scipy.signal import get_window
 import matplotlib.pyplot as plt
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../software/models/'))
-import utilFunctions as UF
-import harmonicModel as HM
-import sineModel as SM
-import stft
+import utilFunctions as UF  # type: ignore
+import harmonicModel as HM  # type: ignore
+import sineModel as SM  # type: ignore
+import stft  # type: ignore
 
 eps = np.finfo(float).eps
 
@@ -67,13 +67,13 @@ def estimateF0(inputFile = '../../sounds/cello-double-2.wav'):
     """
 
     ### Change these analysis parameter values marked as XX
-    window = XX
-    M = XX
-    N = XX
-    f0et = XX
-    t = XX
-    minf0 = XX
-    maxf0 = XX
+    window = "hamming"
+    M = 7056  # 4 * 44100 / 25
+    N = 16384
+    f0et = 50
+    t = -60
+    minf0 = 100
+    maxf0 = 200
 
     ### Do not modify the code below 
     H = 256                                                     #fix hop size
@@ -85,8 +85,8 @@ def estimateF0(inputFile = '../../sounds/cello-double-2.wav'):
     f0 = HM.f0Detection(x, fs, w, N, H, t, minf0, maxf0, f0et)  #estimating F0
     startFrame = np.floor(0.5*fs/H)    
     endFrame = np.ceil(4.0*fs/H)
-    f0[:startFrame] = 0
-    f0[endFrame:] = 0
+    f0[:int(startFrame)] = 0
+    f0[int(endFrame):] = 0
     y = UF.sinewaveSynth(f0, 0.8, H, fs)
     UF.wavwrite(y, fs, 'synthF0Contour.wav')
 
