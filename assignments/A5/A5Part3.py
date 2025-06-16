@@ -95,15 +95,13 @@ def mainlobeTracker(inputFile = '../../sounds/sines-440-602-hRange.wav'):
     mX, pX = stft.stftAnal(x, w, N, H)
     maxplotfreq = 900.0
     binFreq = fs*np.arange(N*maxplotfreq/fs)/N
-    """
-    plt.pcolormesh(tStamps, binFreq, np.transpose(mX[:,:N*maxplotfreq/fs+1]), cmap='hot_r')
+    plt.pcolormesh(tStamps, binFreq, np.transpose(mX[:,:int(N*maxplotfreq/fs+1)]), cmap='hot_r')
     plt.plot(tStamps,fTrackTrue, 'o-', color = 'c', linewidth=3.0)
     plt.plot(tStamps,fTrackEst, color = 'y', linewidth=2.0)
     plt.legend(('True f1', 'True f2', 'Estimated f1', 'Estimated f2'))
     plt.xlabel('Time (s)')
     plt.ylabel('Frequency (Hz)')
     plt.autoscale(tight=True)
-    """
     return window, float(t), tStamps, fTrackEst, fTrackTrue  # Output returned 
 
 ### Do not modify this function
