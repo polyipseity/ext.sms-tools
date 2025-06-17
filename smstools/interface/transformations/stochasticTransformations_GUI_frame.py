@@ -6,7 +6,7 @@ from tkinter import *  # notice lowercase 't' in tkinter here
 from tkinter import messagebox, filedialog
 
 import numpy as np
-from smstools.transformations.interface import stochasticTransformations_function as sT
+from smstools.interface.transformations import stochasticTransformations_function as sT
 from smstools.models import utilFunctions as UF
 
 class StochasticTransformations_frame:

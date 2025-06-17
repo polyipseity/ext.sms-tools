@@ -5,7 +5,7 @@ import sys, os
 from tkinter import messagebox
 
 import numpy as np
-from smstools.transformations.interface import hpsMorph_function as hM
+from smstools.interface.transformations import hpsMorph_function as hM
 from smstools.models import utilFunctions as UF
 
 class HpsMorph_frame:

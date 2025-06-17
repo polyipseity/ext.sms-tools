@@ -4,7 +4,7 @@ from tkinter import *
 import sys, os
 from tkinter import filedialog, messagebox
 
-from smstools.models.interface import hprModel_function
+from smstools.interface.models import hprModel_function
 from smstools.models import utilFunctions as UF
 
 class HprModel_frame:

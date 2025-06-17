@@ -5,7 +5,7 @@ import sys, os
 from tkinter import filedialog, messagebox
 
 import numpy as np
-from smstools.transformations.interface import sineTransformations_function as sT
+from smstools.interface.transformations import sineTransformations_function as sT
 from smstools.models import utilFunctions as UF
 
 class SineTransformations_frame:

@@ -5,7 +5,7 @@ import sys, os
 from tkinter import messagebox
 
 import numpy as np
-from smstools.transformations.interface import harmonicTransformations_function as hT
+from smstools.interface.transformations import harmonicTransformations_function as hT
 from smstools.models import utilFunctions as UF
 
 class HarmonicTransformations_frame:

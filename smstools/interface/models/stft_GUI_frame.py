@@ -4,7 +4,7 @@ from tkinter import *
 import sys, os
 from tkinter import messagebox, filedialog
 
-from smstools.models.interface import stft_function
+from smstools.interface.models import stft_function
 from smstools.models import utilFunctions as UF
 
 

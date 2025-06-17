@@ -1,7 +1,7 @@
 # GUI frame for the dftModel_function.py
 from tkinter import filedialog, messagebox
 
-from smstools.models.interface import dftModel_function
+from smstools.interface.models import dftModel_function
 from smstools.models import utilFunctions as UF
 from tkinter import *
 
