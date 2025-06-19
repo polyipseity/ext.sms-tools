@@ -30,4 +30,5 @@ software/models_GUI.pyproj
 /smstools/models/utilFunctions_C/cutilFunctions.c
 /smstools/models/utilFunctions_C/utilFunctions_C.*.pyd
 /sounds/
+output_sounds/
 # }
