@@ -33,7 +33,7 @@ def showDescriptorMapping():
   for key in descriptorMapping.keys():
     print ("Number %d is for %s"%(key, descriptorMapping[key]))
 
-def descriptorPairScatterPlot(inputDir, descInput = (0,0), anotOn = 0):
+def descriptorPairScatterPlot(inputDir, descInput = (0,0), anotOn = 0, filename = ""):
   """
   This function does a scatter plot of the chosen feature pairs for all the sounds in the 
   directory inputDir. The chosen features are specified in descInput as a tuple. 
@@ -56,7 +56,7 @@ def descriptorPairScatterPlot(inputDir, descInput = (0,0), anotOn = 0):
   dataDetails = fetchDataDetails(inputDir)
   colors = ['r', 'g', 'c', 'b', 'k', 'm', 'y']
   plt.figure()
-  plt.hold(True)
+  # plt.hold(True)
   legArray = []
   catArray = []
   for ii, category in enumerate(dataDetails.keys()):
@@ -67,9 +67,10 @@ def descriptorPairScatterPlot(inputDir, descInput = (0,0), anotOn = 0):
       x_cord = descSound[descInput[0]]
       y_cord = descSound[descInput[1]]
 
-      plt.scatter(x_cord,y_cord, c = colors[ii], s=200, hold = True, alpha=0.75)
+      # plt.scatter(x_cord,y_cord, c = colors[ii], s=200, hold = True, alpha=0.75)
+      plt.scatter(x_cord,y_cord, c = colors[ii], s=200, alpha=0.75)
       if anotOn==1:
-         plt.annotate(soundId, xy=(x_cord, y_cord), xytext=(x_cord, y_cord))
+         plt.annotate(soundId, xy=(x_cord, y_cord), xytext=(x_cord, y_cord))  # type: ignore
     
     circ = Line2D([0], [0], linestyle="none", marker="o", alpha=0.75, markersize=10, markerfacecolor=colors[ii])
     legArray.append(circ)
@@ -78,8 +79,12 @@ def descriptorPairScatterPlot(inputDir, descInput = (0,0), anotOn = 0):
   plt.xlabel(descriptorMapping[descInput[0]], fontsize =16)
   plt.legend(legArray, catArray ,numpoints=1,bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=len(catArray), mode="expand", borderaxespad=0.)
 
-  plt.show()
-  
+  if filename:
+    plt.savefig(filename)
+    plt.close()
+  else:
+    plt.show()
+    plt.close()
 
 def convFtrDict2List(ftrDict):
   """
@@ -244,6 +249,7 @@ def fetchDataDetails(inputDir, descExt = '.json'):
   """
   dataDetails = {}
   for path, dname, fnames  in os.walk(inputDir):
+    path = path.replace("\\", "/")
     for fname in fnames:
       if descExt in fname.lower():
         remain, rname, cname, sname = path.split('/')[:-3], path.split('/')[-3], path.split('/')[-2], path.split('/')[-1]

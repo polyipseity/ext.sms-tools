@@ -1,4 +1,4 @@
-import os, sys
+import os, shutil, sys
 import freesound as fs
 import json
 
@@ -79,13 +79,13 @@ def downloadSoundsFreesound(queryText = "", tag=None, duration=None, API_Key = "
   
   outDir2 = os.path.join(outputDir, queryText)
   if os.path.exists(outDir2):             # If the directory exists, it deletes it and starts fresh
-      os.system("rm -r " + outDir2)
+      shutil.rmtree(outDir2, ignore_errors=True)  # os.system("rm -r " + outDir2)
   os.mkdir(outDir2)
 
   pageNo = 1
   sndCnt = 0
   indCnt = 0
-  totalSnds = min(qRes.count,200)   # System quits after trying to download after 200 times
+  totalSnds = min(qRes.count,200)   # System quits after trying to download after 200 times  # type: ignore
   
   # Creating directories to store output and downloading sounds and their descriptors
   downloadedSounds = []
@@ -93,12 +93,12 @@ def downloadSoundsFreesound(queryText = "", tag=None, duration=None, API_Key = "
     if indCnt >= totalSnds:
       print("Not able to download required number of sounds. Either there are not enough search results on freesound for your search query and filtering constraints or something is wrong with this script.")
       break
-    sound = qRes[indCnt - ((pageNo-1)*page_size)]
+    sound = qRes[indCnt - ((pageNo-1)*page_size)]  # type: ignore
     print("Downloading mp3 preview and descriptors for sound with id: %s"%str(sound.id))
     outDir1 = os.path.join(outputDir, queryText, str(sound.id))
     if os.path.exists(outDir1):
-      os.system("rm -r " + outDir1)
-    os.system("mkdir " + outDir1)
+      shutil.rmtree(outDir1, ignore_errors=True)  # os.system("rm -r " + outDir1)
+    os.makedirs(outDir1)  # os.system("mkdir " + outDir1)
     
     mp3Path = os.path.join(outDir1,  str(sound.previews.preview_lq_mp3.split("/")[-1]))
     ftrPath = mp3Path.replace('.mp3', featureExt)
@@ -120,12 +120,12 @@ def downloadSoundsFreesound(queryText = "", tag=None, duration=None, API_Key = "
 
     except:
       if os.path.exists(outDir1):
-        os.system("rm -r " + outDir1)
+         shutil.rmtree(outDir1, ignore_errors=True) # os.system("rm -r " + outDir1)
     
     indCnt +=1
     
     if indCnt%page_size==0:
-      qRes = qRes.next_page()
+      qRes = qRes.next_page()  # type: ignore
       pageNo+=1
       
     if sndCnt>=topNResults:
