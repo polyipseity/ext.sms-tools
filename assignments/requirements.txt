@@ -1,0 +1,4 @@
+freesound-api>=1.1.0
+matplotlib>=3.9.0
+numpy>=1.26.0
+sms-tools>=1.0.0
