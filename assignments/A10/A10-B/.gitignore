@@ -1,0 +1,24 @@
+# custom {
+/intermediate/*/[0-9]/*.json_frames
+/intermediate/*/[0-9][0-9]/*.json_frames
+/intermediate/*/[0-9][0-9][0-9]/*.json_frames
+/intermediate/*/[0-9][0-9][0-9][0-9]/*.json_frames
+/intermediate/*/[0-9][0-9][0-9][0-9][0-9]/*.json_frames
+/intermediate/*/[0-9][0-9][0-9][0-9][0-9][0-9]/*.json_frames
+/intermediate/*/[0-9][0-9][0-9][0-9][0-9][0-9][0-9]/*.json_frames
+/intermediate/*/[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/*.json_frames
+/intermediate/*/[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/*.json_frames
+/intermediate/*/[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/*.json_frames
+/sounds/*/[0-9]/*.mp3
+/sounds/*/[0-9][0-9]/*.mp3
+/sounds/*/[0-9][0-9][0-9]/*.mp3
+/sounds/*/[0-9][0-9][0-9][0-9]/*.mp3
+/sounds/*/[0-9][0-9][0-9][0-9][0-9]/*.mp3
+/sounds/*/[0-9][0-9][0-9][0-9][0-9][0-9]/*.mp3
+/sounds/*/[0-9][0-9][0-9][0-9][0-9][0-9][0-9]/*.mp3
+/sounds/*/[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/*.mp3
+/sounds/*/[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/*.mp3
+/sounds/*/[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/*.mp3
+/streaming_extractor_music*
+!/streaming_extractor_music profile.yml
+# }
