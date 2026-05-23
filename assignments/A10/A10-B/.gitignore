@@ -1,4 +1,4 @@
-# custom {
+# self {
 /intermediate/*/[0-9]/*.json_frames
 /intermediate/*/[0-9][0-9]/*.json_frames
 /intermediate/*/[0-9][0-9][0-9]/*.json_frames

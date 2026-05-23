@@ -25,7 +25,7 @@ software/models/utilFunctions_C/utilFunctions_C.cp310-win_amd64.pyd
 software/models/utilFunctions_C/utilFunctions_C.cp39-win_amd64.pyd
 software/models_GUI.pyproj
 
-# custom {
+# self {
 /sms_tools.egg-info/
 /smstools/models/utilFunctions_C/cutilFunctions.c
 /smstools/models/utilFunctions_C/utilFunctions_C.*.pyd
